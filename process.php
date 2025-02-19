@@ -10,10 +10,13 @@ if (file_exists(__DIR__ . '/.env')) {
 }
 
 // Obtener la pregunta del usuario
-$question = $_POST['question'];
+$question = $_POST['question'] ?? '';
+
+if (empty($question)) {
+  die("Pregunta no proporcionada.");
+}
 
 // Configuración de la API
-//$apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=TU_API_KEY"; // Reemplaza TU_API_KEY
 $apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
 
 // Datos de entrada
@@ -40,32 +43,36 @@ $options = [
 
 // Enviar la solicitud
 $context = stream_context_create($options);
-$response = file_get_contents($apiUrl, false, $context);
+$response = @file_get_contents($apiUrl, false, $context);
+
+session_start();
 
 if ($response === FALSE) {
   $error = error_get_last();
-  die("Error HTTP: " . $error['message']);
-}
-
-// Decodificar la respuesta JSON
-$result = json_decode($response, true);
-
-// Manejar errores de la API
-if (isset($result['error'])) {
-  die("Error de la API: " . $result['error']['message']);
-}
-
-// Extraer la respuesta generada
-$generatedText = "";
-if (isset($result['candidates'][0]['content']['parts'][0]['text'])) {
-  $generatedText = $result['candidates'][0]['content']['parts'][0]['text'];
+  if (strpos($error['message'], '400') !== false) {
+    $_SESSION['response'] = 'Error 400: Bad Request. Please check your input and try again.';
+  } else {
+    $_SESSION['response'] = 'An unexpected error occurred. Please try again later.';
+  }
 } else {
-  $generatedText = "Lo siento, no pude generar una respuesta.";
+  // Decodificar la respuesta JSON
+  $result = json_decode($response, true);
+
+  // Manejar errores de la API
+  if (isset($result['error'])) {
+    $_SESSION['response'] = "Error de la API: " . $result['error']['message'];
+  } else {
+    // Extraer la respuesta generada
+    $generatedText = "";
+    if (isset($result['candidates'][0]['content']['parts'][0]['text'])) {
+      $generatedText = $result['candidates'][0]['content']['parts'][0]['text'];
+    } else {
+      $generatedText = "Lo siento, no pude generar una respuesta.";
+    }
+    $_SESSION['response'] = $generatedText;
+  }
 }
 
-// Redirigir de vuelta al formulario con la respuesta
-session_start();
-$_SESSION['response'] = $generatedText;
 header("Location: index.php");
 exit();
 ?>

@@ -5,30 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chatbot con Google AI Studio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    form {
-      margin-bottom: 20px;
-    }
-    textarea {
-      width: 100%;
-      height: 100px;
-      margin-bottom: 10px;
-    }
-    .response {
-      background: #f4f4f4;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    label.checkbox-label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
   <h1>Chatbot con Google AI Studio</h1>
@@ -63,22 +40,7 @@
     unset($_SESSION['response']); // Limpiar la respuesta luego de mostrarla
   }
   ?>
-
-  <!-- Script para habilitar/deshabilitar el combo box -->
-  <script>
-    function toggleModelSelect() {
-      // Obtener el checkbox y el combo box
-      const enableModelCheckbox = document.getElementById('enableModel');
-      const modelSelect = document.getElementById('model');
-
-      // Habilitar/deshabilitar el combo box según el estado del checkbox
-      modelSelect.disabled = !enableModelCheckbox.checked;
-
-      // Si el combo box está habilitado, asegúrate de que tenga un valor seleccionado
-      if (!modelSelect.disabled) {
-        modelSelect.focus();
-      }
-    }
-  </script>
+  
+  <script src="assets/js/script.js" defer></script>
 </body>
 </html>
