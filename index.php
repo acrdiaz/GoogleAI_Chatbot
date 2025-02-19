@@ -60,7 +60,7 @@
     echo '<div class="response">';
     echo htmlspecialchars($_SESSION['response']);
     echo '</div>';
-    unset($_SESSION['response']); // Clear the response after displaying it
+    unset($_SESSION['response']); // Limpiar la respuesta luego de mostrarla
   }
   ?>
 
