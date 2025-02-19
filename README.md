@@ -52,6 +52,7 @@ Antes de ejecutar este proyecto, asegúrate de cumplir con los siguientes requis
     2. Agrega tu API Key al archivo .env:
 
        ```
+       GOOGLE_API_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent
        GOOGLE_API_KEY=TU_API_KEY
        ```
 
