@@ -1,0 +1,16 @@
+Aquí tienes algunos de los modelos más populares que puedes usar:
+
+1. Gemini Models
+gemini-1.5-flash:generateContent : Un modelo rápido y eficiente para tareas generales.
+gemini-pro:generateContent : Un modelo avanzado para tareas complejas como generación de texto, preguntas y respuestas, y más.
+
+2. Text Models
+text-bison-001:generateText : Un modelo de lenguaje general para tareas como generación de texto, resúmenes y preguntas/respuestas.
+text-unicorn-001:generateText : Un modelo experimental para tareas específicas (puede no estar disponible en todas las cuentas).
+
+3. Chat Models
+chat-bison-001:generateMessage : Un modelo optimizado para diálogos interactivos.
+
+4. Embedding Models
+embedding-gecko-001 : Para generar embeddings (representaciones vectoriales de texto) útiles para búsquedas semánticas o clustering.
+Nota : No todos los modelos están disponibles para todos los usuarios. Algunos pueden requerir acceso especial o estar en versión beta. 
